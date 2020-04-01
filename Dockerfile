@@ -1,7 +1,7 @@
 FROM ruby:2.6-stretch AS pgloader
-RUN apt-get update -qq && apt-get install -y libsqlite3-dev make curl gawk freetds-dev libzip-dev
+RUN apt-get update -qq && apt-get install -y libsqlite3-dev make curl gawk freetds-dev libzip-dev dos2unix
 COPY docker/mysql-to-postgres/bin/build /tmp/build-pgloader
-RUN /tmp/build-pgloader && rm /tmp/build-pgloader
+RUN cd /tmp/ && ls /tmp && cat build-pgloader && dos2unix build-pgloader && ./build-pgloader && rm build-pgloader
 
 FROM ruby:2.6-stretch
 MAINTAINER operations@openproject.com
